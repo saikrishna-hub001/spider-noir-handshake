@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spider-Noir: The Final Countdown — Lock Screen Generator</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Bangers, Comic Neue, Patrick Hand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,700;1,700&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --noir-bg: #0d0d0f;
+      --noir-panel: #141418;
+      --noir-paper: #efede6;
+      --noir-ink: #141414;
+      --aberration-red: #ff2a4b;
+      --aberration-cyan: #00f0ff;
+    }
+
+    body {
+      background-color: var(--noir-bg);
+      color: #f4f3ef;
+      font-family: 'Comic Neue', cursive, sans-serif;
+      overflow-x: hidden;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 0);
+      background-size: 16px 16px;
+    }
+
+    .font-comic-title {
+      font-family: 'Bangers', cursive;
+      letter-spacing: 0.06em;
+    }
+
+    .font-comic-hand {
+      font-family: 'Patrick Hand', 'Comic Neue', cursive;
+    }
+
+    .noir-rgb-text {
+      text-shadow: -2px 0 var(--aberration-red), 2px 0 var(--aberration-cyan);
+    }
+
+    .noir-rgb-box {
+      box-shadow:
+        -3px 0 0 var(--aberration-red),
+        3px 0 0 var(--aberration-cyan),
+        0 14px 32px rgba(0, 0, 0, 0.85);
+    }
+
+    /* Lock Screen 9:16 Aspect Container */
+    .lockscreen-frame {
+      aspect-ratio: 9 / 16;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0d0f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3f3f46;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff2a4b;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Studio Navigation Bar -->
+  <header class="border-b-2 border-zinc-800 bg-zinc-950/90 backdrop-blur-md sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-zinc-900 border-2 border-white flex items-center justify-center noir-rgb-box shrink-0">
+          <!-- Mini Spider Emblem -->
+          <svg viewBox="0 0 64 64" class="w-7 h-7 fill-white">
+            <ellipse cx="32" cy="36" rx="8" ry="11"/>
+            <circle cx="32" cy="21" r="5"/>
+            <path d="M25 26 C14 20, 10 12, 12 6 M24 31 C10 29, 6 24, 6 18 M24 36 C10 38, 6 44, 8 52 M26 42 C16 48, 14 55, 18 60" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M39 26 C50 20, 54 12, 52 6 M40 31 C54 29, 58 24, 58 18 M40 36 C54 38, 58 44, 56 52 M38 42 C48 48, 50 55, 46 60" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="font-comic-title text-2xl sm:text-3xl tracking-wider text-white noir-rgb-text leading-none">
+            SPIDER-NOIR: THE FINAL COUNTDOWN
+          </h1>
+          <p class="text-xs text-zinc-400 tracking-wide uppercase">
+            High-Res Artwork Overlay Studio &amp; 9:16 Lock Screen Generator
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+        <button id="openRemindersBtn" type="button" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-600 text-xs sm:text-sm font-bold text-cyan-300 flex items-center gap-1.5 transition cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <span>Download .ICS Reminders</span>
+        </button>
+
+        <button id="downloadPngBtn" type="button" class="px-4 py-2 rounded-lg bg-white hover:bg-zinc-200 text-zinc-950 font-comic-title text-base sm:text-lg tracking-wider noir-rgb-box flex items-center gap-2 transition transform active:scale-95 cursor-pointer">
+          <svg class="w-4 h-4 stroke-zinc-950" fill="none" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3"/>
+          </svg>
+          <span>Download 1080×1920 PNG</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Repo / Artwork Status Banner -->
+  <div id="artworkStatusBanner" class="hidden bg-amber-950/90 border-b border-amber-500/50 text-amber-100 px-4 py-2.5 text-xs">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-amber-400">✦ SPIDER-NOIR BASE ARTWORK:</span>
+        <span id="artworkStatusText">
+          Place <code class="bg-black/40 px-1.5 py-0.5 rounded text-cyan-300">spidernoir_3.jpeg</code> next to <code class="bg-black/40 px-1.5 py-0.5 rounded text-cyan-300">index.html</code> on GitHub Pages or load it here:
+        </span>
+      </div>
+      <label for="uploadArtworkInputBanner" class="px-2.5 py-1 rounded bg-amber-400 hover:bg-amber-300 text-zinc-950 font-bold cursor-pointer transition">
+        Load spidernoir_3.jpeg
+      </label>
+      <input id="uploadArtworkInputBanner" type="file" accept="image/*" class="hidden" />
+    </div>
+  </div>
+
+  <!-- Toast Notification Banner -->
+  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-zinc-900 border-2 border-white text-white px-4 py-3 rounded-xl noir-rgb-box transition-all duration-300">
+    <div class="flex items-start gap-3">
+      <span class="text-cyan-400 font-bold text-lg leading-none mt-0.5">✦</span>
+      <div>
+        <p id="toastTitle" class="font-comic-title text-lg tracking-wider leading-tight">SYSTEM UPDATED</p>
+        <p id="toastMessage" class="text-xs text-zinc-300 mt-0.5">Your lock screen wallpaper is ready.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Two-Column Studio Workspace -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+    <!-- LEFT COLUMN: Control Panel -->
+    <section class="lg:col-span-7 space-y-5">
+
+      <!-- Card 1: Artwork Layer & Overlay Mode -->
+      <div class="bg-[#141418] border-2 border-zinc-700 rounded-2xl p-5 shadow-xl">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-3 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 text-xs font-bold bg-red-500/20 text-red-400 border border-red-500/40 rounded">LAYER 01</span>
+            <h2 class="font-comic-title text-2xl tracking-wider text-white">BASE ARTWORK &amp; OVERLAY MODE</h2>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <label for="uploadArtworkInput" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 border border-zinc-600 text-xs font-bold text-white cursor-pointer transition flex items-center gap-1.5">
+              <span>🖼️ Load Your spidernoir_3.jpeg</span>
+            </label>
+            <input id="uploadArtworkInput" type="file" accept="image/*" class="hidden" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- Overlay Mode Toggle -->
+          <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-bold text-white">Display Mode</p>
+              <p class="text-[11px] text-zinc-400">Live Interactive vs. 100% Pure Original</p>
+            </div>
+            <button id="overlayModeToggleBtn" type="button" role="switch" aria-checked="true"
+              class="px-3 py-1.5 rounded-lg font-bold text-xs uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/50 cursor-pointer transition">
+              LIVE INTERACTIVE
+            </button>
+          </div>
+
+          <!-- Live Tick Toggle -->
+          <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-bold text-white">Countdown Clock Mode</p>
+              <p class="text-[11px] text-zinc-400">Live ticking timer vs. static preview</p>
+            </div>
+            <button id="liveTickToggleBtn" type="button" role="switch" aria-checked="true"
+              class="px-3 py-1.5 rounded-lg font-bold text-xs uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 cursor-pointer transition">
+              LIVE TICKING
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Mission Target & Deadline Controls -->
+      <div class="bg-[#141418] border-2 border-zinc-700 rounded-2xl p-5 shadow-xl">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 rounded">LAYER 02</span>
+            <h2 class="font-comic-title text-2xl tracking-wider text-white">TARGET &amp; DEADLINE SETTINGS</h2>
+          </div>
+          <button id="resetAllBtn" type="button" class="text-xs text-zinc-400 hover:text-white underline cursor-pointer">
+            Reset Defaults
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="targetNameInput" class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">
+              Target Title
+            </label>
+            <input id="targetNameInput" type="text" maxlength="32" value="HANDSHAKE CHALLENGE"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 focus:border-cyan-400 focus:outline-none text-white font-bold text-sm" />
+          </div>
+
+          <div>
+            <label for="deadlineDateInput" class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">
+              Deadline Date &amp; Time
+            </label>
+            <input id="deadlineDateInput" type="datetime-local"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 focus:border-cyan-400 focus:outline-none text-white font-bold text-sm" />
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="deadlineLabelInput" class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">
+              Formatted Deadline Banner Label
+            </label>
+            <input id="deadlineLabelInput" type="text" maxlength="38" value="NOV 23 // 11:59 PM PT"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 focus:border-cyan-400 focus:outline-none text-white font-bold text-sm" />
+          </div>
+        </div>
+
+        <!-- Quick Presets -->
+        <div class="mt-4 pt-3 border-t border-zinc-800/80 flex flex-wrap items-center gap-2">
+          <span class="text-xs text-zinc-400 mr-1">Presets:</span>
+          <button type="button" data-preset="handshake" class="preset-btn px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-200 border border-zinc-600 cursor-pointer">
+            Handshake Challenge (Nov 23)
+          </button>
+          <button type="button" data-preset="finals" class="preset-btn px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-200 border border-zinc-600 cursor-pointer">
+            Finals Week
+          </button>
+          <button type="button" data-preset="hackathon" class="preset-btn px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-200 border border-zinc-600 cursor-pointer">
+            Hackathon
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3: Interactive 4-Phase Milestone Toggles -->
+      <div class="bg-[#141418] border-2 border-zinc-700 rounded-2xl p-5 shadow-xl">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-3 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 text-xs font-bold bg-red-500/20 text-red-400 border border-red-500/40 rounded">LAYER 03</span>
+            <h2 class="font-comic-title text-2xl tracking-wider text-white">4-PHASE SPIDER-NOIR MILESTONES</h2>
+          </div>
+          <span id="completionBadge" class="px-3 py-1 rounded-full bg-zinc-950 border border-zinc-600 text-xs font-bold text-cyan-300">
+            50% PROGRESS
+          </span>
+        </div>
+
+        <p class="text-xs text-zinc-400 mb-3">
+          Toggle each phase checkbox or status tag below—the comic progress bar, checkmarks, and status badges update seamlessly on <code class="text-cyan-300">spidernoir_3.jpeg</code> without covering your spider, biting hand, transformation, or Spider-Noir hero artwork.
+        </p>
+
+        <div id="phaseEditorList" class="space-y-2.5">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- GitHub Pages Deployment Note -->
+      <div class="bg-zinc-900/70 border border-zinc-800 rounded-2xl p-4 text-xs text-zinc-300 leading-relaxed">
+        <strong class="text-white font-comic-title text-base tracking-wider block mb-1">🚀 GITHUB PAGES DEPLOYMENT CHECKLIST</strong>
+        Upload both <code class="text-cyan-300">index.html</code> and <code class="text-cyan-300">spidernoir_3.jpeg</code> into the root folder of your GitHub repository, then enable <strong>Settings → Pages → Deploy from main branch</strong>.
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: Live 9:16 Canvas Preview -->
+    <section class="lg:col-span-5 flex flex-col items-center">
+      <div class="w-full max-w-[420px] flex items-center justify-between mb-2 px-1">
+        <span class="text-xs uppercase tracking-widest text-zinc-400 font-bold flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+          Live 9:16 Composite Preview
+        </span>
+        <span id="artSourceTag" class="text-xs text-cyan-300 font-mono">BASE: spidernoir_3.jpeg</span>
+      </div>
+
+      <!-- High-Resolution 1080x1920 Live Preview Canvas -->
+      <div class="lockscreen-frame relative rounded-2xl overflow-hidden bg-zinc-950 border-[3px] border-white noir-rgb-box">
+        <canvas id="previewCanvas" width="1080" height="1920" class="w-full h-full block"></canvas>
+
+        <!-- Prompt shown ONLY if spidernoir_3.jpeg hasn't been loaded into the preview sandbox yet -->
+        <div id="missingArtOverlay" class="hidden absolute inset-0 bg-zinc-950/90 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center z-10">
+          <div class="w-14 h-14 rounded-2xl bg-zinc-900 border-2 border-white noir-rgb-box flex items-center justify-center mb-4">
+            <span class="text-2xl">🕷️</span>
+          </div>
+          <h3 class="font-comic-title text-2xl tracking-wider text-white noir-rgb-text mb-2">
+            LOAD YOUR SPIDER-NOIR ARTWORK
+          </h3>
+          <p class="text-xs text-zinc-300 leading-relaxed mb-5 max-w-xs">
+            Select your <code class="text-cyan-300">spidernoir_3.jpeg</code> image to render your exact hand-inked 1930s Spider-Noir artwork with live ticking countdown digits &amp; interactive checkboxes.
+          </p>
+          <label for="uploadArtworkInputOverlay" class="px-5 py-3 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-comic-title text-lg tracking-wider noir-rgb-box cursor-pointer transition">
+            Select spidernoir_3.jpeg
+          </label>
+          <input id="uploadArtworkInputOverlay" type="file" accept="image/*" class="hidden" />
+          <p class="text-[11px] text-zinc-400 mt-4">
+            On GitHub Pages, place <code class="text-cyan-300">spidernoir_3.jpeg</code> next to <code class="text-cyan-300">index.html</code> and it loads automatically!
+          </p>
+        </div>
+      </div>
+
+      <!-- Artwork Status Indicator Pill -->
+      <div id="previewStatusPill" class="mt-2.5 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-700 text-[11px] font-bold text-cyan-300 text-center max-w-[420px]">
+        Checking for spidernoir_3.jpeg...
+      </div>
+
+      <p class="text-[11px] text-zinc-400 mt-2 text-center max-w-[400px]">
+        Tip: Click <strong>Download 1080×1920 PNG</strong> to save an exact, pixel-for-pixel copy of the preview above for your phone lock screen and Handshake submission.
+      </p>
+    </section>
+  </main>
+
+  <!-- Smart Reminders & .ICS Calendar Export Modal -->
+  <div id="remindersModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-zinc-900 border-2 border-white rounded-2xl max-w-md w-full p-6 noir-rgb-box relative">
+      <div class="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4">
+        <h3 class="font-comic-title text-2xl tracking-wider text-white">
+          SPIDER-SENSE REMINDER SCHEDULE
+        </h3>
+        <button id="closeRemindersBtn" type="button" class="text-zinc-400 hover:text-white text-xl font-bold px-2 cursor-pointer">
+          ✕
+        </button>
+      </div>
+
+      <p class="text-xs text-zinc-300 mb-4 leading-relaxed">
+        Download a universal <code class="text-white">.ics</code> calendar file with 4 milestone reminders working backward from your <strong id="modalTargetSummary" class="text-cyan-300">HANDSHAKE CHALLENGE</strong> deadline:
+      </p>
+
+      <div id="reminderTimelinePreview" class="space-y-2 mb-5 bg-zinc-950 p-3.5 rounded-xl border border-zinc-800 text-xs">
+        <!-- Populated dynamically -->
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-2.5">
+        <button id="downloadIcsBtn" type="button" class="flex-1 py-2.5 px-4 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-comic-title text-lg tracking-wider cursor-pointer transition">
+          Download .ICS File
+        </button>
+        <button id="closeRemindersFooterBtn" type="button" class="py-2.5 px-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-600 text-xs font-bold cursor-pointer transition">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const W = 1080;
+      const H = 1920;
+      const STORAGE_KEY = 'spider_noir_composite_state_v3';
+
+      const DEFAULT_STATE = {
+        targetName: 'HANDSHAKE CHALLENGE',
+        deadlineISO: '2026-11-23T23:59',
+        deadlineLabel: 'NOV 23 // 11:59 PM PT',
+        overlayMode: true,
+        liveTick: true,
+        phases: [
+          { id: 1, title: 'Brainstorm & Plan', checked: true, status: 'COMPLETED' },
+          { id: 2, title: 'Create Design', checked: true, status: 'ACTIVE' },
+          { id: 3, title: 'Set Reminders', checked: false, status: 'LOCKED' },
+          { id: 4, title: 'Submit!', checked: false, status: 'READY' }
+        ]
+      };
+
+      const STATUS_OPTIONS = ['COMPLETED', 'ACTIVE', 'LOCKED', 'READY'];
+
+      let appState = loadState();
+      let baseArtworkImg = null;
+      let isUsingFallbackArt = false;
+      let artworkSourceLabel = 'spidernoir_3.jpeg';
+      let isCustomModified = false;
+
+      // DOM Elements
+      const previewCanvas = document.getElementById('previewCanvas');
+      const ctx = previewCanvas.getContext('2d');
+
+      const targetNameInput = document.getElementById('targetNameInput');
+      const deadlineDateInput = document.getElementById('deadlineDateInput');
+      const deadlineLabelInput = document.getElementById('deadlineLabelInput');
+      const overlayModeToggleBtn = document.getElementById('overlayModeToggleBtn');
+      const liveTickToggleBtn = document.getElementById('liveTickToggleBtn');
+      const phaseEditorList = document.getElementById('phaseEditorList');
+      const completionBadge = document.getElementById('completionBadge');
+      const artSourceTag = document.getElementById('artSourceTag');
+      const artworkStatusBanner = document.getElementById('artworkStatusBanner');
+      const previewStatusPill = document.getElementById('previewStatusPill');
+      const missingArtOverlay = document.getElementById('missingArtOverlay');
+
+      // Utility helpers for persistent state, HTML escaping, and toast alerts
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            return {
+              ...JSON.parse(JSON.stringify(DEFAULT_STATE)),
+              ...parsed,
+              phases: Array.isArray(parsed.phases) && parsed.phases.length === 4
+                ? parsed.phases
+                : JSON.parse(JSON.stringify(DEFAULT_STATE.phases))
+            };
+          }
+        } catch (err) {
+          console.warn('Could not load saved state:', err);
+        }
+        return JSON.parse(JSON.stringify(DEFAULT_STATE));
+      }
+
+      function saveState() {
+        isCustomModified = true;
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+        } catch (err) {
+          console.warn('Could not save state:', err);
+        }
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      let toastTimer = null;
+      function showToast(title, message) {
+        const banner = document.getElementById('toastBanner');
+        const titleEl = document.getElementById('toastTitle');
+        const msgEl = document.getElementById('toastMessage');
+        if (!banner || !titleEl || !msgEl) return;
+        titleEl.textContent = title;
+        msgEl.textContent = message;
+        banner.classList.remove('hidden');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          banner.classList.add('hidden');
+        }, 4200);
+      }
+
+      // =========================================================================
+      // 1. LOAD BASE ARTWORK (./spidernoir_3.jpeg -> ./spidernoir_2.jpeg -> ./spidernoir.jpeg)
+      // =========================================================================
+      function loadDefaultBaseArtwork() {
+        const candidates = ['./spidernoir_3.jpeg', './spidernoir_2.jpeg', './spidernoir.jpeg'];
+        let idx = 0;
+
+        function tryNextCandidate() {
+          if (idx >= candidates.length) {
+            baseArtworkImg = null;
+            isUsingFallbackArt = true;
+            artworkSourceLabel = 'Awaiting spidernoir_3.jpeg';
+            artSourceTag.textContent = 'BASE: Select spidernoir_3.jpeg';
+            artworkStatusBanner.classList.remove('hidden');
+            if (missingArtOverlay) missingArtOverlay.classList.remove('hidden');
+            if (previewStatusPill) {
+              previewStatusPill.textContent = 'Select spidernoir_3.jpeg above (or place it next to index.html on GitHub Pages)';
+              previewStatusPill.className = 'mt-2.5 px-3 py-1 rounded-full bg-amber-950/90 border border-amber-500/50 text-[11px] font-bold text-amber-300 text-center max-w-[420px]';
+            }
+            renderCompositeCanvas();
+            return;
+          }
+
+          const candidateSrc = candidates[idx++];
+          const cleanName = candidateSrc.replace('./', '');
+          const img = new Image();
+          img.onload = () => {
+            baseArtworkImg = img;
+            isUsingFallbackArt = false;
+            artworkSourceLabel = cleanName;
+            artSourceTag.textContent = `BASE: ${cleanName}`;
+            artworkStatusBanner.classList.add('hidden');
+            if (missingArtOverlay) missingArtOverlay.classList.add('hidden');
+            if (previewStatusPill) {
+              previewStatusPill.textContent = `✓ Exact Artwork Loaded: ${cleanName} (1080×1920)`;
+              previewStatusPill.className = 'mt-2.5 px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-500/50 text-[11px] font-bold text-emerald-300 text-center max-w-[420px]';
+            }
+            renderCompositeCanvas();
+          };
+          img.onerror = tryNextCandidate;
+          img.src = candidateSrc;
+        }
+
+        tryNextCandidate();
+      }
+
+      // Handle User File Upload ("Load Your spidernoir_3.jpeg") -> Data URL avoids any CORS taint
+      function handleArtworkFileSelect(file) {
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const img = new Image();
+          img.onload = () => {
+            baseArtworkImg = img;
+            isUsingFallbackArt = false;
+            artworkSourceLabel = file.name;
+            artSourceTag.textContent = `BASE: ${file.name}`;
+            artworkStatusBanner.classList.add('hidden');
+            if (missingArtOverlay) missingArtOverlay.classList.add('hidden');
+            if (previewStatusPill) {
+              previewStatusPill.textContent = `✓ Exact Artwork Loaded: ${file.name} (1080×1920)`;
+              previewStatusPill.className = 'mt-2.5 px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-500/50 text-[11px] font-bold text-emerald-300 text-center max-w-[420px]';
+            }
+            renderCompositeCanvas();
+            showToast('EXACT ARTWORK LOADED', `Using "${file.name}" with live countdown & phase overlays.`);
+          };
+          img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      document.getElementById('uploadArtworkInput').addEventListener('change', (e) => {
+        handleArtworkFileSelect(e.target.files?.[0]);
+      });
+      document.getElementById('uploadArtworkInputBanner').addEventListener('change', (e) => {
+        handleArtworkFileSelect(e.target.files?.[0]);
+      });
+      if (document.getElementById('uploadArtworkInputOverlay')) {
+        document.getElementById('uploadArtworkInputOverlay').addEventListener('change', (e) => {
+          handleArtworkFileSelect(e.target.files?.[0]);
+        });
+      }
+
+      // =========================================================================
+      // 2. COUNTDOWN & COMPOSITE CANVAS HELPERS
+      // =========================================================================
+      function getCountdownParts() {
+        if (!appState.liveTick) {
+          return { days: '07', hours: '06', mins: '18', secs: '22' };
+        }
+        const targetMs = new Date(appState.deadlineISO).getTime();
+        const diff = Math.max(0, (Number.isFinite(targetMs) ? targetMs : Date.now()) - Date.now());
+        const totalSecs = Math.floor(diff / 1000);
+        const days = Math.floor(totalSecs / 86400);
+        const hours = Math.floor((totalSecs % 86400) / 3600);
+        const mins = Math.floor((totalSecs % 3600) / 60);
+        const secs = totalSecs % 60;
+        const pad = (n) => String(n).padStart(2, '0');
+        return {
+          days: pad(Math.min(99, days)),
+          hours: pad(hours),
+          mins: pad(mins),
+          secs: pad(secs)
+        };
+      }
+
+      function getCheckedCount() {
+        return appState.phases.filter((p) => p.checked).length;
+      }
+
+      function drawPaperHalftoneOverlay(c, x, y, w, h) {
+        c.save();
+        c.fillStyle = 'rgba(20, 20, 20, 0.045)';
+        for (let dy = y + 6; dy < y + h - 4; dy += 12) {
+          for (let dx = x + 6; dx < x + w - 4; dx += 12) {
+            c.beginPath();
+            c.arc(dx, dy, 1.3, 0, Math.PI * 2);
+            c.fill();
+          }
+        }
+        c.restore();
+      }
+
+      function drawComicCheckbox(c, x, y, size, checked) {
+        c.save();
+        c.fillStyle = '#f8f6f0';
+        c.strokeStyle = '#141414';
+        c.lineWidth = 4;
+        c.fillRect(x, y, size, size);
+        c.strokeRect(x, y, size, size);
+        if (checked) {
+          c.strokeStyle = '#141414';
+          c.lineWidth = 5.5;
+          c.lineCap = 'round';
+          c.lineJoin = 'round';
+          c.beginPath();
+          c.moveTo(x + 6, y + size * 0.55);
+          c.lineTo(x + size * 0.42, y + size - 7);
+          c.lineTo(x + size + 7, y - 6);
+          c.stroke();
+        }
+        c.restore();
+      }
+
+      function hasDefaultMilestones() {
+        return appState.phases.every((p, i) => {
+          const def = DEFAULT_STATE.phases[i];
+          return p.title.trim() === def.title && p.checked === def.checked && p.status === def.status;
+        });
+      }
+
+      function renderCompositeCanvas() {
+        ctx.clearRect(0, 0, W, H);
+
+        // Draw Base Artwork (spidernoir_3.jpeg or uploaded artwork)
+        if (baseArtworkImg) {
+          ctx.drawImage(baseArtworkImg, 0, 0, W, H);
+        } else {
+          ctx.fillStyle = '#0d0d0f';
+          ctx.fillRect(0, 0, W, H);
+          return;
+        }
+
+        // If user selected "100% Pure Original Artwork", stop here so pure artwork is shown/exported
+        if (!appState.overlayMode) {
+          return;
+        }
+
+        // -----------------------------------------------------------------------
+        // OVERLAY B: Live Countdown Digits ONLY (y: 636..796)
+        // Samples exact paper color from artwork & blends seamlessly with zero overlap!
+        // -----------------------------------------------------------------------
+        if (appState.liveTick || isCustomModified) {
+          const parts = getCountdownParts();
+          ctx.save();
+
+          // Sample exact warm off-white paper color from the interior of the box
+          let paperFill = '#ece9e1';
+          try {
+            const p = ctx.getImageData(540, 642, 1, 1).data;
+            if (p && p[3] > 200) {
+              paperFill = `rgb(${p[0]}, ${p[1]}, ${p[2]})`;
+            }
+          } catch (e) {
+            paperFill = '#ece9e1';
+          }
+
+          const boxX = 112;
+          const boxY = 636;
+          const boxW = 856;
+          const boxH = 160;
+
+          // Soft-feathered paper patch matching exact artwork paper tone
+          ctx.shadowColor = paperFill;
+          ctx.shadowBlur = 10;
+          ctx.fillStyle = paperFill;
+          ctx.fillRect(boxX, boxY, boxW, boxH);
+          ctx.shadowBlur = 0;
+
+          // Subtle comic paper grain & halftone blend so there's zero visible highlight box
+          drawPaperHalftoneOverlay(ctx, boxX, boxY, boxW, boxH);
+
+          // Organic comic ink digits matching the original hand-lettered weight & slight soft edge
+          ctx.textAlign = 'center';
+          ctx.fillStyle = '#161616';
+          ctx.shadowColor = 'rgba(20, 20, 20, 0.28)';
+          ctx.shadowBlur = 1.5;
+          ctx.font = 'bold 132px "Patrick Hand", "Comic Neue", sans-serif';
+
+          const cols = [208, 426, 646, 868];
+          ctx.fillText(parts.days, cols[0], 770);
+          ctx.fillText(parts.hours, cols[1], 770);
+          ctx.fillText(parts.mins, cols[2], 770);
+          ctx.fillText(parts.secs, cols[3], 770);
+
+          ctx.font = 'bold 110px "Patrick Hand", sans-serif';
+          ctx.fillText(':', 317, 760);
+          ctx.fillText(':', 536, 760);
+          ctx.fillText(':', 757, 760);
+          ctx.restore();
+        }
+
+        // -----------------------------------------------------------------------
+        // OVERLAY C: Sketchy Diagonal-Hatched Mission Progress Bar (x: 72..928, y: 1030..1074)
+        // Only patch when user modifies milestones so default matches spidernoir_3.jpeg 1:1
+        // -----------------------------------------------------------------------
+        const defaultMilestones = hasDefaultMilestones();
+        if (!defaultMilestones) {
+          const checkedCount = getCheckedCount();
+          const progressRatio = checkedCount / 4;
+
+          ctx.save();
+          const barX = 72;
+          const barY = 1030;
+          const barW = 856;
+          const barH = 44;
+
+          ctx.fillStyle = '#efede6';
+          ctx.fillRect(barX, barY, barW, barH);
+          ctx.strokeStyle = '#141414';
+          ctx.lineWidth = 5;
+          ctx.strokeRect(barX, barY, barW, barH);
+
+          if (progressRatio > 0) {
+            const fillW = Math.max(24, (barW - 8) * progressRatio);
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(barX + 4, barY + 4, fillW, barH - 8);
+            ctx.clip();
+
+            ctx.fillStyle = 'rgba(20, 20, 20, 0.14)';
+            ctx.fillRect(barX + 4, barY + 4, fillW, barH - 8);
+
+            ctx.strokeStyle = '#141414';
+            ctx.lineWidth = 3.5;
+            for (let hx = barX - barH; hx < barX + fillW + barH; hx += 15) {
+              ctx.beginPath();
+              ctx.moveTo(hx, barY + barH);
+              ctx.lineTo(hx + barH, barY);
+              ctx.stroke();
+            }
+            ctx.restore();
+
+            const tipX = barX + 4 + fillW;
+            ctx.strokeStyle = '#141414';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(tipX, barY - 3);
+            ctx.lineTo(tipX, barY + barH + 3);
+            ctx.stroke();
+
+            ctx.fillStyle = '#141414';
+            ctx.beginPath();
+            ctx.arc(tipX + 5, barY + barH - 8, 5, 0, Math.PI * 2);
+            ctx.arc(tipX - 6, barY + 10, 3.5, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+
+        // -----------------------------------------------------------------------
+        // OVERLAY D: Interactive 4-Phase Checkboxes & Status Badges
+        // Only patch when user customizes milestones so default matches spidernoir_3.jpeg 1:1
+        // -----------------------------------------------------------------------
+        if (!defaultMilestones) {
+          ctx.save();
+
+          // Phase 1 Row — stops at x=838 to preserve hanging spider!
+          const p1 = appState.phases[0];
+          ctx.fillStyle = '#efede6';
+          ctx.fillRect(156, 1280, 682, 74);
+          drawPaperHalftoneOverlay(ctx, 156, 1280, 682, 74);
+          drawComicCheckbox(ctx, 166, 1296, 40, p1.checked);
+          ctx.fillStyle = '#141414';
+          ctx.font = 'bold 31px "Patrick Hand", "Comic Neue", cursive';
+          ctx.textAlign = 'left';
+          ctx.fillText(`PHASE 1: ${p1.title} [${p1.status}]`, 220, 1328);
+
+          // Phase 2 Row — stops at x=735 to preserve biting hand ("CHOMP!")!
+          const p2 = appState.phases[1];
+          ctx.fillStyle = '#efede6';
+          ctx.fillRect(156, 1364, 579, 76);
+          drawPaperHalftoneOverlay(ctx, 156, 1364, 579, 76);
+          drawComicCheckbox(ctx, 166, 1380, 40, p2.checked);
+          ctx.fillStyle = '#141414';
+          ctx.font = 'bold 30px "Patrick Hand", "Comic Neue", cursive';
+          ctx.fillText(`PHASE 2: ${p2.title} [${p2.status}]`, 220, 1412);
+
+          // Phase 3 Row — stops at x=885 above Phase 3 transformation panel!
+          const p3 = appState.phases[2];
+          ctx.fillStyle = '#efede6';
+          ctx.fillRect(156, 1448, 729, 74);
+          drawPaperHalftoneOverlay(ctx, 156, 1448, 729, 74);
+          drawComicCheckbox(ctx, 166, 1464, 40, p3.checked);
+          ctx.fillStyle = '#141414';
+          ctx.font = 'bold 31px "Patrick Hand", "Comic Neue", cursive';
+          ctx.fillText(`PHASE 3: ${p3.title} [${p3.status}]`, 220, 1496);
+
+          // Phase 4 Header — sits cleanly above Phase 4 Spider-Noir hero!
+          const p4 = appState.phases[3];
+          ctx.fillStyle = '#efede6';
+          ctx.fillRect(584, 1538, 326, 98);
+          drawPaperHalftoneOverlay(ctx, 584, 1538, 326, 98);
+          ctx.fillStyle = '#141414';
+          ctx.font = 'bold 33px "Patrick Hand", "Comic Neue", cursive';
+          ctx.fillText(`PHASE 4: ${p4.title}`, 594, 1574);
+          ctx.font = 'bold 28px "Patrick Hand", "Comic Neue", cursive';
+          ctx.fillText(`[${p4.checked ? '✓' : '🚀'} ${p4.status}]`, 594, 1614);
+
+          ctx.restore();
+        }
+      }
+
+      // =========================================================================
+      // 3. UI CONTROLS, PHASE LIST EDITOR & .ICS CALENDAR GENERATOR
+      // =========================================================================
+      function syncInputsFromState() {
+        targetNameInput.value = appState.targetName;
+        deadlineDateInput.value = appState.deadlineISO;
+        deadlineLabelInput.value = appState.deadlineLabel;
+
+        overlayModeToggleBtn.setAttribute('aria-checked', String(appState.overlayMode));
+        overlayModeToggleBtn.textContent = appState.overlayMode ? 'LIVE INTERACTIVE' : 'PURE ORIGINAL ART';
+        overlayModeToggleBtn.className = appState.overlayMode
+          ? 'px-3 py-1.5 rounded-lg font-bold text-xs uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/50 cursor-pointer transition'
+          : 'px-3 py-1.5 rounded-lg font-bold text-xs uppercase tracking-wider bg-zinc-800 text-zinc-200 border border-zinc-600 cursor-pointer transition';
+
+        liveTickToggleBtn.setAttribute('aria-checked', String(appState.liveTick));
+        liveTickToggleBtn.textContent = appState.liveTick ? 'LIVE TICKING' : 'STATIC (07:06:18:22)';
+        liveTickToggleBtn.className = appState.liveTick
+          ? 'px-3 py-1.5 rounded-lg font-bold text-xs uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 cursor-pointer transition'
+          : 'px-3 py-1.5 rounded-lg font-bold text-xs uppercase tracking-wider bg-zinc-800 text-zinc-200 border border-zinc-600 cursor-pointer transition';
+
+        renderPhaseEditorList();
+      }
+
+      function renderPhaseEditorList() {
+        const checkedCount = getCheckedCount();
+        completionBadge.textContent = `${Math.round((checkedCount / 4) * 100)}% PROGRESS`;
+
+        const phaseArtIcons = [
+          { icon: '🕷️', caption: 'Phase 1: Hanging Spider' },
+          { icon: '🕸️', caption: 'Phase 2: Spider Bite (CHOMP!)' },
+          { icon: '⚡', caption: 'Phase 3: Spider-Sense Transformation' },
+          { icon: '🕵️', caption: 'Phase 4: Full Spider-Noir Hero' }
+        ];
+
+        phaseEditorList.innerHTML = appState.phases.map((phase, idx) => {
+          const meta = phaseArtIcons[idx] || { icon: '🕷️', caption: '' };
+          return `
+            <div class="p-3 rounded-xl bg-zinc-950 border ${phase.checked ? 'border-cyan-500/50' : 'border-zinc-800'} flex flex-wrap items-center justify-between gap-2.5">
+              <div class="flex items-center gap-3 flex-1 min-w-[200px]">
+                <input type="checkbox" data-phase-check="${idx}" ${phase.checked ? 'checked' : ''}
+                  class="w-5 h-5 accent-cyan-400 rounded cursor-pointer shrink-0" />
+                <div class="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-700 flex items-center justify-center text-lg shrink-0" title="${escapeHtml(meta.caption)}">
+                  ${meta.icon}
+                </div>
+                <div class="flex-1">
+                  <span class="text-[10px] uppercase tracking-wider text-zinc-400 block">Phase 0${phase.id} • ${escapeHtml(meta.caption)}</span>
+                  <input type="text" data-phase-title="${idx}" maxlength="26" value="${escapeHtml(phase.title)}"
+                    class="w-full bg-transparent border-b border-zinc-700 focus:border-cyan-400 focus:outline-none text-sm font-bold text-white py-0.5" />
+                </div>
+              </div>
+
+              <select data-phase-status="${idx}"
+                class="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs font-bold text-zinc-200 focus:border-cyan-400 focus:outline-none cursor-pointer">
+                ${STATUS_OPTIONS.map((opt) => `<option value="${opt}" ${phase.status === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+              </select>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Event Listeners for Inputs & Toggles
+      targetNameInput.addEventListener('input', (e) => {
+        appState.targetName = e.target.value || 'HANDSHAKE CHALLENGE';
+        saveState();
+        renderCompositeCanvas();
+      });
+
+      deadlineDateInput.addEventListener('change', (e) => {
+        if (!e.target.value) return;
+        appState.deadlineISO = e.target.value;
+        const dt = new Date(e.target.value);
+        if (!Number.isNaN(dt.getTime())) {
+          const month = dt.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+          const day = String(dt.getDate()).padStart(2, '0');
+          const time = dt.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }).toUpperCase();
+          appState.deadlineLabel = `${month} ${day} // ${time}`;
+          deadlineLabelInput.value = appState.deadlineLabel;
+        }
+        saveState();
+        renderCompositeCanvas();
+      });
+
+      deadlineLabelInput.addEventListener('input', (e) => {
+        appState.deadlineLabel = e.target.value || 'NOV 23 // 11:59 PM PT';
+        saveState();
+        renderCompositeCanvas();
+      });
+
+      overlayModeToggleBtn.addEventListener('click', () => {
+        appState.overlayMode = !appState.overlayMode;
+        saveState();
+        syncInputsFromState();
+        renderCompositeCanvas();
+      });
+
+      liveTickToggleBtn.addEventListener('click', () => {
+        appState.liveTick = !appState.liveTick;
+        saveState();
+        syncInputsFromState();
+        renderCompositeCanvas();
+      });
+
+      phaseEditorList.addEventListener('change', (e) => {
+        const checkIdx = e.target.getAttribute('data-phase-check');
+        const statusIdx = e.target.getAttribute('data-phase-status');
+        if (checkIdx !== null) {
+          const idx = Number(checkIdx);
+          appState.phases[idx].checked = e.target.checked;
+          if (e.target.checked && appState.phases[idx].status === 'LOCKED') {
+            appState.phases[idx].status = 'COMPLETED';
+          }
+          saveState();
+          renderPhaseEditorList();
+          renderCompositeCanvas();
+        }
+        if (statusIdx !== null) {
+          const idx = Number(statusIdx);
+          appState.phases[idx].status = e.target.value;
+          saveState();
+          renderCompositeCanvas();
+        }
+      });
+
+      phaseEditorList.addEventListener('input', (e) => {
+        const titleIdx = e.target.getAttribute('data-phase-title');
+        if (titleIdx !== null) {
+          const idx = Number(titleIdx);
+          appState.phases[idx].title = e.target.value;
+          saveState();
+          renderCompositeCanvas();
+        }
+      });
+
+      // Quick Presets
+      document.querySelectorAll('.preset-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const preset = btn.getAttribute('data-preset');
+          if (preset === 'handshake') {
+            appState.targetName = 'HANDSHAKE CHALLENGE';
+            appState.deadlineISO = '2026-11-23T23:59';
+            appState.deadlineLabel = 'NOV 23 // 11:59 PM PT';
+            isCustomModified = false;
+          } else if (preset === 'finals') {
+            appState.targetName = 'FINALS WEEK SPRINT';
+            appState.deadlineISO = '2026-12-14T17:00';
+            appState.deadlineLabel = 'DEC 14 // 5:00 PM EST';
+            isCustomModified = true;
+          } else if (preset === 'hackathon') {
+            appState.targetName = '48-HR HACKATHON DEMO';
+            const soon = new Date(Date.now() + 48 * 3600 * 1000);
+            appState.deadlineISO = soon.toISOString().slice(0, 16);
+            appState.deadlineLabel = '48-HOUR SUBMISSION';
+            isCustomModified = true;
+          }
+          saveState();
+          syncInputsFromState();
+          renderCompositeCanvas();
+          showToast('PRESET APPLIED', `Target updated to ${appState.targetName}.`);
+        });
+      });
+
+      // Reset Defaults
+      document.getElementById('resetAllBtn').addEventListener('click', () => {
+        appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+        isCustomModified = false;
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch (err) {
+          console.warn(err);
+        }
+        syncInputsFromState();
+        renderCompositeCanvas();
+        showToast('DEFAULTS RESTORED', 'Restored original Handshake Challenge layout.');
+      });
+
+      // Download 1080x1920 PNG
+      document.getElementById('downloadPngBtn').addEventListener('click', () => {
+        if (!baseArtworkImg) {
+          showToast('LOAD ARTWORK FIRST', 'Please select spidernoir_3.jpeg first so your lock screen can be exported.');
+          return;
+        }
+        try {
+          renderCompositeCanvas();
+          const dataUrl = previewCanvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.download = 'spider-noir-countdown-1080x1920.png';
+          link.href = dataUrl;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          showToast('WALLPAPER EXPORTED', 'Saved spider-noir-countdown-1080x1920.png (1080×1920).');
+        } catch (err) {
+          console.error('PNG Export error:', err);
+          showToast('EXPORT NOTICE', 'Use "Load Your spidernoir_3.jpeg" if opening directly from a local folder.');
+        }
+      });
+
+      // Reminders Modal & .ICS Generator
+      const remindersModal = document.getElementById('remindersModal');
+      const reminderTimelinePreview = document.getElementById('reminderTimelinePreview');
+      const modalTargetSummary = document.getElementById('modalTargetSummary');
+
+      function buildReminderSchedule() {
+        const deadlineMs = new Date(appState.deadlineISO).getTime();
+        const validDeadline = Number.isFinite(deadlineMs) ? deadlineMs : Date.now() + 7 * 86400 * 1000;
+        const offsetsDays = [6, 4, 2, 0];
+        return appState.phases.map((phase, idx) => {
+          const eventTime = new Date(validDeadline - offsetsDays[idx] * 86400 * 1000);
+          return {
+            phaseNum: phase.id,
+            title: phase.title,
+            date: eventTime,
+            formatted: eventTime.toLocaleString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: '2-digit'
+            })
+          };
+        });
+      }
+
+      document.getElementById('openRemindersBtn').addEventListener('click', () => {
+        modalTargetSummary.textContent = appState.targetName;
+        const schedule = buildReminderSchedule();
+        reminderTimelinePreview.innerHTML = schedule.map((item) => `
+          <div class="flex items-center justify-between gap-2 py-1 border-b border-zinc-800/80 last:border-none">
+            <span class="font-bold text-white">Phase ${item.phaseNum}: ${escapeHtml(item.title)}</span>
+            <span class="text-cyan-300 font-mono text-[11px]">${escapeHtml(item.formatted)}</span>
+          </div>
+        `).join('');
+        remindersModal.classList.remove('hidden');
+      });
+
+      const closeModal = () => remindersModal.classList.add('hidden');
+      document.getElementById('closeRemindersBtn').addEventListener('click', closeModal);
+      document.getElementById('closeRemindersFooterBtn').addEventListener('click', closeModal);
+
+      document.getElementById('downloadIcsBtn').addEventListener('click', () => {
+        const schedule = buildReminderSchedule();
+        const formatICSDate = (d) => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        const lines = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//Spider-Noir Countdown Lock Screen//EN'
+        ];
+        schedule.forEach((item) => {
+          const start = formatICSDate(item.date);
+          const end = formatICSDate(new Date(item.date.getTime() + 30 * 60 * 1000));
+          lines.push(
+            'BEGIN:VEVENT',
+            `UID:spider-noir-p${item.phaseNum}-${Date.now()}@countdown`,
+            `DTSTAMP:${formatICSDate(new Date())}`,
+            `DTSTART:${start}`,
+            `DTEND:${end}`,
+            `SUMMARY:[Spider-Noir] Phase ${item.phaseNum}: ${item.title} (${appState.targetName})`,
+            `DESCRIPTION:Spider-Noir Countdown Milestone for ${appState.targetName}`,
+            'END:VEVENT'
+          );
+        });
+        lines.push('END:VCALENDAR');
+
+        const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'spider-noir-reminders.ics';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        closeModal();
+        showToast('REMINDERS EXPORTED', 'Downloaded spider-noir-reminders.ics for your calendar.');
+      });
+
+      // Initialize App & Start Live 1-Second Ticker
+      syncInputsFromState();
+      loadDefaultBaseArtwork();
+      setInterval(() => {
+        if (appState.liveTick && baseArtworkImg) {
+          renderCompositeCanvas();
+        }
+      }, 1000);
+    })();
+  </script>
+</body>
+</html>
